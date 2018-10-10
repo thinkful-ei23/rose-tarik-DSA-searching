@@ -1,5 +1,6 @@
 import React from 'react';
 import linearSearch from './linearSearch';
+import binarySearch from './binarySearch';
 
 // 1 input, 2 submit buttons
 // linear search 
@@ -15,7 +16,6 @@ export default class App extends React.Component {
   }
 
   setVal(e) {
-    console.log(e.target.value);
     this.setState({
       searchVal: e.target.value
     });
@@ -23,22 +23,39 @@ export default class App extends React.Component {
 
   linearSearch() {
     const searchVal = Number(this.state.searchVal);
+
     const searchResult = linearSearch(this.props.arr, searchVal);
     let message;
+
     if (searchResult.index === -1) {
-      message = `Value not found. The search ran '${searchResult.count}' times.`
+      message = `Value not found. The search ran '${searchResult.count}' times.`;
     }
     else {
-      message = `Value found at index '${searchResult.index}'. The search ran '${searchResult.count}' time(s).`
+      message = `Value found at index '${searchResult.index}'. The search ran '${searchResult.count}' time(s).`;
     }
-
-    console.log('New message - ', message);
 
     this.setState({
       message
     });
+  }
 
-    console.log('LinearSearch ran! New message - ', this.state.message);
+  binarySearch() {
+    let sortedArr = [...this.props.arr].sort((a,b) => a-b);
+    const searchVal = Number(this.state.searchVal);
+
+    const searchResult = binarySearch(sortedArr, searchVal);
+    let message;
+
+    if (searchResult.index === -1) {
+      message = `Value not found. The search ran '${searchResult.count}' times.`;
+    }
+    else {
+      message = `Value found at index '${searchResult.index}'. The search ran '${searchResult.count}' time(s).`;
+    }
+    
+    this.setState({
+      message
+    });
   }
 
   render() {
@@ -56,6 +73,11 @@ export default class App extends React.Component {
             name="linear-search"
             onClick={() => (this.linearSearch())}
           >Linear Search</button>
+          <button 
+            type="button"
+            name="binary-search"
+            onClick={() => (this.binarySearch())}
+          >Binary Search</button>
         </form>
         <section className="search-results">
           <p>
