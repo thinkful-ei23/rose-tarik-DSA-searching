@@ -30,6 +30,18 @@ function main() {
   console.log(tree.inOrder());
   console.log(tree.preOrder());
   console.log(tree.postOrder());
+  let sharePriceTree = new BinarySearchTree();
+  let prices = [128, 97, 121, 123, 98, 97, 105];
+  prices.forEach(price => sharePriceTree.insert(price));
+  maxProfit(sharePriceTree);
 }
+
+function maxProfit(tree) {
+  const sortedTree = tree.inOrder();
+  const maxProf = sortedTree[sortedTree.length - 1] - sortedTree[0];
+  console.log('The max profit for this dataset is: ', maxProf);
+  return maxProf;
+}
+
 main();
 
