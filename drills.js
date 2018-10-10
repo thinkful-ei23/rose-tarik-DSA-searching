@@ -30,31 +30,35 @@ function main() {
   console.log(tree.inOrder());
   console.log(tree.preOrder());
   console.log(tree.postOrder());
-  let sharePriceTree = new BinarySearchTree();
-  let prices = [128, 97, 121, 123, 98, 97, 105];
-  prices.forEach(price => sharePriceTree.insert(price));
-  maxProfit(sharePriceTree);
-  eggDrop();
+  maxProfit([128, 97, 121, 123, 98, 97, 105]);
 }
 
-function maxProfit(tree) {
-  const sortedTree = tree.inOrder();
-  const maxProf = sortedTree[sortedTree.length - 1] - sortedTree[0];
-  console.log('The max profit for this dataset is: ', maxProf);
+function maxProfit(arr) {
+  let smallest = arr[0];
+  let minIndex = 0;
+  arr.forEach((price, index) => {
+    if (price < smallest) {
+      smallest = price;
+      minIndex = index;
+    }
+  });
+
+  let largest = 0;
+
+  for (let i = minIndex; i < arr.length; i++) {
+    if (arr[i] > largest) {
+      largest = arr[i];
+    }
+  }
+
+  const maxProf = largest - smallest;
+  console.log('The max profit is: ', maxProf);
   return maxProf;
 }
 
-function eggDrop(n=14, sum=14) { //sum is >= 100 is base case
-
-  console.log(`We're at the ${n}th floor`);
-
-  if(sum === 99) { //base case
-    console.log(`We've reached the top floor`);
-    return;
-  }
-  else {  
-    sum+=n; 
-    return n + eggDrop(n-1, sum);
+function eggDrop(n=14, val) { //sum is >= 100 is base case
+  if (n === 3) {
+    console.log('We`ve reached the 99th floor');
   }
 }
 
