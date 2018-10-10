@@ -1,28 +1,51 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import linearSearch from './linearSearch';
 
-class App extends Component {
+// 1 input, 2 submit buttons
+// linear search 
+// binary search 
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props); 
+      this.state = {
+        count: 0, //hold number of iterations to find an item in the dataset
+        searchVal: 0 //value that user searches for 
+      }
+  }
+
+  setVal(e) {
+    console.log(e.target.value);
+    this.setState({
+      searchVal: e.target.value
+    });
+  }
+
+  linearSearch() {
+    const searchVal = this.state.searchVal;
+    linearSearch(this.props.arr, searchVal);
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <div className="ui">
+        <form className="search" id="search">
+          <input 
+            type="number" 
+            className="searchVal" 
+            id="searchVal" 
+            name="searchVal" 
+            onChange={ (e) => (this.setVal(e)) }/>
+          <button 
+            type="button"
+            name="linear-search"
+            onClick={ () => (this.linearSearch())}
+          >Linear Search</button>
+          
+        </form>
+      </div> 
+    )
   }
-}
 
-export default App;
+
+}
