@@ -34,6 +34,7 @@ function main() {
   let prices = [128, 97, 121, 123, 98, 97, 105];
   prices.forEach(price => sharePriceTree.insert(price));
   maxProfit(sharePriceTree);
+  eggDrop();
 }
 
 function maxProfit(tree) {
@@ -41,6 +42,20 @@ function maxProfit(tree) {
   const maxProf = sortedTree[sortedTree.length - 1] - sortedTree[0];
   console.log('The max profit for this dataset is: ', maxProf);
   return maxProf;
+}
+
+function eggDrop(n=14, sum=14) { //sum is >= 100 is base case
+
+  console.log(`We're at the ${n}th floor`);
+
+  if(sum === 99) { //base case
+    console.log(`We've reached the top floor`);
+    return;
+  }
+  else {  
+    sum+=n; 
+    return n + eggDrop(n-1, sum);
+  }
 }
 
 main();
