@@ -28,6 +28,8 @@ function main() {
   seq.forEach(num => tree.insert(num)); 
 
   console.log(tree.inOrder());
+  console.log(tree.preOrder());
+  console.log(tree.postOrder());
 }
 main();
 
